@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
 import javafx.stage.Stage;
+import org.kordamp.bootstrapfx.BootstrapFX;
 
 public class App extends Application {
 
@@ -21,9 +22,12 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+//        Application.setUserAgentStylesheet("/themes/dracula.css");
         ViewTuple<MainView, MainViewModel> main = FluentViewLoader.fxmlView(MainView.class).load();
 
         Scene rootScene = new Scene(main.getView());
+        String sheet = BootstrapFX.bootstrapFXStylesheet();
+        rootScene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
 
         stage.maximizedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
