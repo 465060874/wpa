@@ -1,6 +1,5 @@
 package com.wpa.view.main;
 
-import atlantafx.base.theme.Styles;
 import com.wpa.dto.Criteria;
 import com.wpa.model.CodeNamePair;
 import com.wpa.model.category.Category;
@@ -10,7 +9,6 @@ import de.saxsys.mvvmfx.*;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -18,7 +16,7 @@ import javafx.util.Builder;
 import javafx.util.BuilderFactory;
 import javafx.util.Callback;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

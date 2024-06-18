@@ -43,19 +43,20 @@
             <version>${mvvmfx.version}</version>
         </dependency>
 
-<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.jboss.weld.se/weld-se-core &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.jboss.weld.se</groupId>-->
-<!--            <artifactId>weld-se-core</artifactId>-->
-<!--            <version>3.0.0.Final</version>-->
-<!--        </dependency>-->
-
-<!--        &lt;!&ndash; https://mvnrepository.com/artifact/de.saxsys/mvvmfx-cdi &ndash;&gt;-->
+        <!-- https://mvnrepository.com/artifact/de.saxsys/mvvmfx-cdi -->
 <!--        <dependency>-->
 <!--            <groupId>de.saxsys</groupId>-->
 <!--            <artifactId>mvvmfx-cdi</artifactId>-->
 <!--            <version>1.8.0</version>-->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>javax.enterprise</groupId>-->
+<!--                    <artifactId>cdi-api</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
 <!--        </dependency>-->
+
+
 
         <dependency>
             <groupId>org.kordamp.ikonli</groupId>
@@ -91,12 +92,29 @@
             <artifactId>bootstrapfx-core</artifactId>
             <version>0.4.0</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/jakarta.enterprise/jakarta.enterprise.cdi-api -->
         <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <version>1</version>
-            <scope>compile</scope>
+            <groupId>jakarta.enterprise</groupId>
+            <artifactId>jakarta.enterprise.cdi-api</artifactId>
+            <version>4.1.0</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.jboss.weld.se/weld-se-core -->
+        <dependency>
+            <groupId>org.jboss.weld.se</groupId>
+            <artifactId>weld-se-core</artifactId>
+            <version>5.1.2.Final</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>6.1.9</version>
+        </dependency>
+
 
     </dependencies>
 
