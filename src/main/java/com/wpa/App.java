@@ -24,6 +24,7 @@ public class App extends MvvmfxCdiApplication {
     private static ApplicationContext context;
 
     public static void main(String... args) {
+        Application.setUserAgentStylesheet("/themes/primer-light.css");
         Application.launch(args);
     }
 

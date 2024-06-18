@@ -6,6 +6,7 @@ import com.wpa.model.category.Category;
 import com.wpa.view.business.BusinessView;
 import com.wpa.view.business.BusinessViewModel;
 import de.saxsys.mvvmfx.*;
+import jakarta.enterprise.context.ApplicationScoped;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
@@ -36,6 +37,9 @@ public class MainView implements FxmlView<MainViewModel> {
 
     @Inject
     private Stage primaryStage;
+
+    @Inject
+    BusinessViewModel businessViewModel;
 
     private Map<String, Integer> linkWithIndex = new HashMap<>();
 
@@ -124,7 +128,8 @@ public class MainView implements FxmlView<MainViewModel> {
 
         Parent root = null;
         if("br_message".equalsIgnoreCase(menuItem.getCode())){
-            BusinessViewModel businessViewModel =new BusinessViewModel(menuItem.getCode());
+//            BusinessViewModel businessViewModel =new BusinessViewModel(menuItem.getCode());
+            businessViewModel.setType(menuItem.getCode());
 
             ViewTuple<BusinessView, BusinessViewModel> load = FluentViewLoader
                     .fxmlView(BusinessView.class).viewModel(businessViewModel)

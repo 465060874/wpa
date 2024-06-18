@@ -1,8 +1,18 @@
 package com.wpa.model.business;
 
+import javafx.beans.Observable;
+
 public class Business {
     private String title;
     private String content;
+
+    public Business() {
+
+    }
+    public Business(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
 
     public String getTitle() {
         return title;
