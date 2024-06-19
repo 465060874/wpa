@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.wpa.test.student2.StudentListView">
+    <TableView fx:id="studentTable">
+        <columns>
+            <TableColumn text="Name" prefWidth="100">
+                <cellValueFactory><PropertyValueFactory property="name"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Age" prefWidth="50">
+                <cellValueFactory><PropertyValueFactory property="age"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Grade" prefWidth="100">
+                <cellValueFactory><PropertyValueFactory property="grade"/></cellValueFactory>
+            </TableColumn>
+
+        </columns>
+    </TableView>
+</VBox>
