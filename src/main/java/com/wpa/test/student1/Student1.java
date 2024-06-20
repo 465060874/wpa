@@ -16,16 +16,40 @@ public class Student1 {
         this.grade = new SimpleStringProperty(grade);
     }
 
-    public String getName() { return name.get(); }
-    public void setName(String name) { this.name.set(name); }
-    public StringProperty nameProperty() { return name; }
+    public String getName() {
+        return name.get();
+    }
 
-    public int getAge() { return age.get(); }
-    public void setAge(int age) { this.age.set(age); }
-    public IntegerProperty ageProperty() { return age; }
+    public void setName(String name) {
+        this.name.set(name);
+    }
 
-    public String getGrade() { return grade.get(); }
-    public void setGrade(String grade) { this.grade.set(grade); }
-    public StringProperty gradeProperty() { return grade; }
+    public StringProperty nameProperty() {
+        return name;
+    }
+
+    public int getAge() {
+        return age.get();
+    }
+
+    public void setAge(int age) {
+        this.age.set(age);
+    }
+
+    public IntegerProperty ageProperty() {
+        return age;
+    }
+
+    public String getGrade() {
+        return grade.get();
+    }
+
+    public void setGrade(String grade) {
+        this.grade.set(grade);
+    }
+
+    public StringProperty gradeProperty() {
+        return grade;
+    }
 }
 

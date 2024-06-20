@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
-@FXMLView(value = "/fxml/StudentList.fxml")
 public class EditStudentView implements FxmlView<EditStudentViewModel> {
     @InjectViewModel
     private EditStudentViewModel viewModel;

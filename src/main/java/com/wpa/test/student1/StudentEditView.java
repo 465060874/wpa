@@ -1,5 +1,6 @@
 package com.wpa.test.student1;
 
+import com.wpa.test.student2.Student;
 import de.saxsys.mvvmfx.FxmlView;
 import de.saxsys.mvvmfx.InjectViewModel;
 import javafx.fxml.FXML;
@@ -23,9 +24,12 @@ public class StudentEditView implements FxmlView<StudentEditViewModel> {
     private StudentEditViewModel viewModel;
 
     public void initialize() {
-        nameField.textProperty().bindBidirectional(viewModel.nameProperty());
-        ageField.textProperty().bindBidirectional(viewModel.ageProperty(), new NumberStringConverter());
-        gradeField.textProperty().bindBidirectional(viewModel.gradeProperty());
+        Student1 student = viewModel.getStudent();
+        if (student != null) {
+            nameField.textProperty().bindBidirectional(student.nameProperty());
+            ageField.textProperty().bindBidirectional(student.ageProperty(), new NumberStringConverter());
+            gradeField.textProperty().bindBidirectional(student.gradeProperty());
+        }
     }
 
     @FXML

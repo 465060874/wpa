@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 public class StudentManagementApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
+        Application.setUserAgentStylesheet("/themes/nord-light.css");
         // Create the global scope
         StudentScope studentScope = new StudentScope();
 

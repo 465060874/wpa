@@ -13,10 +13,16 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class StudentListView implements FxmlView<StudentListViewModel> {
     @InjectViewModel
     private StudentListViewModel viewModel;
+
+    @Autowired
+    private StudentListViewModel viewModel1;
 
     @FXML
     private TableView<Student> studentTable;
