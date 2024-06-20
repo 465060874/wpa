@@ -66,7 +66,7 @@ public class StudentListView implements FxmlView<StudentListViewModel> {
     public void openEditStudentView(Student student) {
         viewModel.editStudent(student);
         ViewTuple<EditStudentView, EditStudentViewModel> editViewTuple = FluentViewLoader.fxmlView(EditStudentView.class)
-                .providedScopes(viewModel.getStudentScope()) // 获取scope实例
+//                .providedScopes(viewModel.getStudentScope()) // 获取scope实例
                 .load();
         Stage stage = new Stage();
         stage.setScene(new Scene(editViewTuple.getView()));

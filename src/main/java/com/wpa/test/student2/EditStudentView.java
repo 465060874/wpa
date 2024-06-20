@@ -6,6 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
+import org.springframework.stereotype.Component;
+
+@Component
 public class EditStudentView implements FxmlView<EditStudentViewModel> {
     @InjectViewModel
     private EditStudentViewModel viewModel;

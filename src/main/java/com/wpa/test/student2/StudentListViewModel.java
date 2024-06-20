@@ -1,6 +1,5 @@
 package com.wpa.test.student2;
 
-import com.wpa.test.SharedDataService;
 import de.saxsys.mvvmfx.InjectScope;
 import de.saxsys.mvvmfx.ViewModel;
 import javafx.collections.ObservableList;
@@ -9,21 +8,23 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class StudentListViewModel implements ViewModel {
-    @InjectScope
-    private StudentScope studentScope;
+//    @InjectScope
+//    private StudentScope studentScope;
 
     @Autowired
     private SharedDataService sharedDataService;
 
-    public StudentScope getStudentScope() {
-        return studentScope;
-    }
+//    public StudentScope getStudentScope() {
+//        return studentScope;
+//    }
 
     public ObservableList<Student> getStudents() {
-        return studentScope.getStudents();
+//        return studentScope.getStudents();
+        return sharedDataService.getStudents();
     }
 
     public void editStudent(Student student) {
-        studentScope.selectedStudentProperty().set(student);
+//        studentScope.selectedStudentProperty().set(student);
+        sharedDataService.selectedStudentProperty().set(student);
     }
 }

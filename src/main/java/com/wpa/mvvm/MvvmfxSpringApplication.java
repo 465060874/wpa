@@ -1,5 +1,6 @@
 package com.wpa.mvvm;
 
+import com.wpa.config.AppConfig;
 import de.saxsys.mvvmfx.MvvmFX;
 import de.saxsys.mvvmfx.internal.MvvmfxApplication;
 import de.saxsys.mvvmfx.utils.notifications.NotificationCenter;
@@ -7,6 +8,7 @@ import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.stage.Stage;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 /**
@@ -49,13 +51,19 @@ public abstract class MvvmfxSpringApplication extends Application implements Mvv
 	 */
 	@Override
 	public final void init() throws Exception {
+		ctx = initSpringContext();
 //		ctx = SpringApplication.run(this.getClass());
+//		ctx = new AnnotationConfigApplicationContext(AppConfig.class);
 
 		MvvmFX.setCustomDependencyInjector(ctx::getBean);
 
 		ctx.getBeanFactory().autowireBean(this);
 
 		initMvvmfx();
+	}
+
+	protected ConfigurableApplicationContext initSpringContext(){
+		return new AnnotationConfigApplicationContext(this.getClass());
 	}
 
 	/**
