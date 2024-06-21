@@ -6,12 +6,18 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
+@Scope("prototype")
 public class EditStudentView implements FxmlView<EditStudentViewModel> {
     @InjectViewModel
     private EditStudentViewModel viewModel;
+
+    @Autowired
+    private EditStudentViewModel viewModel1;
 
     @FXML
     private TextField nameField;

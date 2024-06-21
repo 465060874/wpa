@@ -14,9 +14,11 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
+@Scope("prototype")
 public class StudentListView implements FxmlView<StudentListViewModel> {
     @InjectViewModel
     private StudentListViewModel viewModel;
@@ -30,6 +32,7 @@ public class StudentListView implements FxmlView<StudentListViewModel> {
     @FXML
     public void initialize() {
         studentTable.setItems(viewModel.getStudents());
+
 
         TableColumn<Student, Void> editColumn = new TableColumn<>("Edit");
         editColumn.setCellFactory(new Callback<TableColumn<Student, Void>, TableCell<Student, Void>>() {
