@@ -1,7 +1,9 @@
 package com.wpa.view.business;
 
 import com.wpa.model.business.Business;
+import org.springframework.stereotype.Component;
 
+@Component
 public class BusinessTableViewModel {
     private Business business;
 

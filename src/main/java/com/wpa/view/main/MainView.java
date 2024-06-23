@@ -3,13 +3,15 @@ package com.wpa.view.main;
 import com.wpa.dto.Criteria;
 import com.wpa.model.CodeNamePair;
 import com.wpa.model.category.Category;
-import com.wpa.view.business.BusinessView;
-import com.wpa.view.business.BusinessViewModel;
+import com.wpa.view.business.BusinessListView;
+import com.wpa.view.business.BusinessListViewModel;
 import de.saxsys.mvvmfx.*;
-import jakarta.enterprise.context.ApplicationScoped;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -18,10 +20,15 @@ import javafx.util.BuilderFactory;
 import javafx.util.Callback;
 
 import jakarta.inject.Inject;
+import org.springframework.stereotype.Component;
+
+import java.awt.*;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Component
 public class MainView implements FxmlView<MainViewModel> {
     @InjectViewModel
     private MainViewModel viewModel;
@@ -33,13 +40,18 @@ public class MainView implements FxmlView<MainViewModel> {
     private TreeView<CodeNamePair> categoryTree;
 
     @FXML
-    private TabPane tableTabPane;
+    private TitledPane contentPane;
 
-    @Inject
-    private Stage primaryStage;
+    @FXML
+    private VBox detailBox;
 
-    @Inject
-    BusinessViewModel businessViewModel;
+    @FXML
+    private Pane detailPane;
+
+
+
+//    @Inject
+//    BusinessViewModel businessViewModel;
 
     private Map<String, Integer> linkWithIndex = new HashMap<>();
 
@@ -55,6 +67,12 @@ public class MainView implements FxmlView<MainViewModel> {
     }
 
     public void initialize() {
+//        detailBox.prefWidthProperty().bind(detailPane.widthProperty());
+//        detailBox.prefHeightProperty().bind(detailPane.heightProperty());
+        splitPane.setResizableWithParent(contentPane, false);
+
+        contentPane.prefWidthProperty().bind(splitPane.widthProperty());
+        contentPane.prefHeightProperty().bind(splitPane.heightProperty());
         // Initialize the view model here.
         System.out.println("Initializing MainView");
         List<Category> categories = Category.getCategories();
@@ -102,49 +120,54 @@ public class MainView implements FxmlView<MainViewModel> {
     private void updateTab(CodeNamePair menuItem) {
         if(LINK_MAPS.containsKey(menuItem.getCode())){
             try {
-                int tabCount = tableTabPane.getTabs().size();
-                if(linkWithIndex.containsKey(menuItem.getCode())){
-                    tableTabPane.getSelectionModel().select(linkWithIndex.get(menuItem.getCode()));
-//                    tabPane.getTabs().get(linkWithIndex.get(menuItem.getCode()));
-                }else {
-                    WebView webView = new WebView();
-                    WebEngine webEngine = webView.getEngine();
-                    webEngine.load(LINK_MAPS.get(menuItem.getCode()));
-                    Tab tab = new Tab(menuItem.getName(), webView);
-                    tab.setClosable(true);
-                    tableTabPane.getTabs().add(tabCount, tab);
-                    tableTabPane.getSelectionModel().select(tabCount);
-                    linkWithIndex.put(menuItem.getCode(), tabCount);
-                }
+//                int tabCount = tableTabPane.getTabs().size();
+//                if(linkWithIndex.containsKey(menuItem.getCode())){
+//                    tableTabPane.getSelectionModel().select(linkWithIndex.get(menuItem.getCode()));
+////                    tabPane.getTabs().get(linkWithIndex.get(menuItem.getCode()));
+//                }else {
+//                    WebView webView = new WebView();
+//                    WebEngine webEngine = webView.getEngine();
+//                    webEngine.load(LINK_MAPS.get(menuItem.getCode()));
+//                    Tab tab = new Tab(menuItem.getName(), webView);
+//                    tab.setClosable(true);
+//                    contentPane.setContent(webView);
+////                    tableTabPane.getTabs().add(tabCount, tab);
+////                    tableTabPane.getSelectionModel().select(tabCount);
+////                    linkWithIndex.put(menuItem.getCode(), tabCount);
+//                }
                 // 打开指定的 URL
-//                Desktop.getDesktop().browse(new URI(LINK_MAPS.get(menuItem.getCode())));
+                Desktop.getDesktop().browse(new URI(LINK_MAPS.get(menuItem.getCode())));
             } catch (Exception e) {
                 e.printStackTrace();
             }
             return;
         }
 
-        tableTabPane.getTabs().get(0).setText(menuItem.getName());
+//        tableTabPane.getTabs().get(0).setText(menuItem.getName());
 
         Parent root = null;
         if("br_message".equalsIgnoreCase(menuItem.getCode())){
-//            BusinessViewModel businessViewModel =new BusinessViewModel(menuItem.getCode());
-            businessViewModel.setType(menuItem.getCode());
+            BusinessListViewModel businessListViewModel =new BusinessListViewModel(menuItem.getCode());
+//            businessViewModel.setType(menuItem.getCode());
 
-            ViewTuple<BusinessView, BusinessViewModel> load = FluentViewLoader
-                    .fxmlView(BusinessView.class).viewModel(businessViewModel)
+            ViewTuple<BusinessListView, BusinessListViewModel> load = FluentViewLoader
+                    .fxmlView(BusinessListView.class).viewModel(businessListViewModel)
                     .load();
             root = load.getView();
+            contentPane.setText(menuItem.getName());
 
         }else {
+
 //            KnowledgeEntryTableView entryTableView = new KnowledgeEntryTableView();
 //            TableView<KnowledgeEntryDTO> knowledgeEntryTableView = entryTableView.getTableView();
 //            Styles.toggleStyleClass(knowledgeEntryTableView, Styles.BORDERED);
 //            Styles.toggleStyleClass(knowledgeEntryTableView, Styles.STRIPED);
 //            root = new StackPane(knowledgeEntryTableView);
         }
-        tableTabPane.getTabs().get(0).setContent(root);
-        tableTabPane.getSelectionModel().select(tableTabPane.getTabs().get(0));
+        contentPane.setText(menuItem.getName());
+        contentPane.setContent(root);
+//        tableTabPane.getTabs().get(0).setContent(root);
+//        tableTabPane.getSelectionModel().select(tableTabPane.getTabs().get(0));
 
 
 

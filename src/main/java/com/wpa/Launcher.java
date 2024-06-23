@@ -2,15 +2,13 @@ package com.wpa;
 
 import com.wpa.config.AppConfig;
 import com.wpa.mvvm.MvvmfxCdiApplication;
+import com.wpa.mvvm.MvvmfxSpringApplication;
 import com.wpa.view.main.MainView;
 import com.wpa.view.main.MainViewModel;
 import de.saxsys.mvvmfx.FluentViewLoader;
-import de.saxsys.mvvmfx.MvvmFX;
 import de.saxsys.mvvmfx.ViewTuple;
 import javafx.application.Application;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
 import javafx.stage.Stage;
@@ -18,14 +16,18 @@ import org.kordamp.bootstrapfx.BootstrapFX;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import javafx.application.HostServices;
 
-public class App extends MvvmfxCdiApplication {
-    private static ApplicationContext context;
+public class Launcher extends MvvmfxSpringApplication {
+    public static final boolean IS_DEV_MODE= true;
 
     public static void main(String... args) {
-        Application.setUserAgentStylesheet("/themes/primer-light.css");
+//        Application.setUserAgentStylesheet("/themes/primer-light.css");
+//        Application.setUserAgentStylesheet(new PrimerLight().getUserAgentStylesheet());
         Application.launch(args);
+    }
+
+    protected ConfigurableApplicationContext initSpringContext(){
+        return new AnnotationConfigApplicationContext(AppConfig.class);
     }
 
 //    @Override
@@ -54,8 +56,7 @@ public class App extends MvvmfxCdiApplication {
 
     @Override
     public void startMvvmfx(Stage stage) throws Exception {
-        super.init();
-        context = new AnnotationConfigApplicationContext(AppConfig.class);
+//        super.init();
         initUI(stage);
     }
 
@@ -68,9 +69,9 @@ public class App extends MvvmfxCdiApplication {
         //        Application.setUserAgentStylesheet("/themes/dracula.css");
         ViewTuple<MainView, MainViewModel> main = FluentViewLoader.fxmlView(MainView.class).load();
 
-        Scene rootScene = new Scene(main.getView());
-        String sheet = BootstrapFX.bootstrapFXStylesheet();
-        rootScene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
+        Scene rootScene = new Scene(main.getView(),1200,900);
+         rootScene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
+//        Application.setUserAgentStylesheet("/themes/primer-light.css");
 
         stage.maximizedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {

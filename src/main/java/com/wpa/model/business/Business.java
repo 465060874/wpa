@@ -4,6 +4,7 @@ import javafx.beans.Observable;
 
 public class Business {
     private String title;
+    private String shortDescription;
     private String content;
 
     public Business() {

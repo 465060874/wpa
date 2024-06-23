@@ -3,19 +3,17 @@ package com.wpa.view.business;
 import com.wpa.model.business.Business;
 import com.wpa.service.BusinessService;
 import de.saxsys.mvvmfx.ViewModel;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BusinessViewModel implements ViewModel {
+@Component
+public class BusinessListViewModel implements ViewModel {
 
     private BusinessService businessService;
 
@@ -31,10 +29,10 @@ public class BusinessViewModel implements ViewModel {
 
     private List<Business> allBusinessList = new ArrayList<>();
 
-    public BusinessViewModel(){
+    public BusinessListViewModel(){
 
     }
-    public BusinessViewModel(String type) {
+    public BusinessListViewModel(String type) {
         this.type = type;
     }
 

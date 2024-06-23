@@ -3,14 +3,10 @@ package com.wpa.view.business;
 import com.wpa.dto.Criteria;
 import com.wpa.repository.BusinessRepository;
 import com.wpa.service.BusinessService;
-import com.wpa.view.main.MainViewModel;
 import de.saxsys.mvvmfx.Context;
 import de.saxsys.mvvmfx.FxmlView;
 import de.saxsys.mvvmfx.InjectContext;
 import de.saxsys.mvvmfx.InjectViewModel;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -27,15 +23,18 @@ import javafx.util.Callback;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeSolid;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-public class BusinessView implements FxmlView<BusinessViewModel> {
+@Component
+@Scope("prototype")
+public class BusinessListView implements FxmlView<BusinessListViewModel> {
 
-    @Inject
+    @Autowired
     private BusinessService businessService;
 
-    @Inject
-    private BusinessRepository businessRepository;
+//    @Autowired
+//    private BusinessRepository businessRepository;
 
     @FXML
     private TableView<BusinessTableViewModel> businessTable;
@@ -47,7 +46,7 @@ public class BusinessView implements FxmlView<BusinessViewModel> {
     private Context context;
 
     @InjectViewModel
-    private BusinessViewModel viewModel;
+    private BusinessListViewModel viewModel;
 
     @FXML
     TableColumn<BusinessTableViewModel, String> contentColumn;
@@ -71,12 +70,9 @@ public class BusinessView implements FxmlView<BusinessViewModel> {
         actionColumn.setCellFactory(param -> new TableCell<>() {
             //            private final Button editButton = new Button("Edit");
             private final Hyperlink editButton = new Hyperlink("编辑");
-
             {
-
-//                editButton.getStyleClass().setAll("btn","btn-info");
-                //editButton.setMnemonicParsing(true);
-
+                editButton.getStyleClass().setAll("btn","btn-info");
+                editButton.setMnemonicParsing(true);
                 editButton.setOnAction(event -> {
                     BusinessTableViewModel businessTableViewModel = getTableView().getItems().get(getIndex());
                     viewModel.setSelectedTableRowViewModel(businessTableViewModel);
@@ -203,13 +199,6 @@ public class BusinessView implements FxmlView<BusinessViewModel> {
         // 创建保存按钮
         Button saveButton = new Button("Save");
         saveButton.setOnAction(event -> {
-
-//            entryDTO.setCategory(categoryField.getText());
-//            entryDTO.setTitle(titleField.getText());
-//            entryDTO.setContent(htmlEditor.getHtmlText());
-
-//            tableView.refresh(); // 更新 TableView
-
 
             viewModel.getSelectedTableRowViewModel().getBusiness().setTitle(titleField.getText());
             viewModel.getSelectedTableRowViewModel().getBusiness().setContent(contentField.getText());
