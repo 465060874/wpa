@@ -5,12 +5,10 @@ import atlantafx.base.theme.Styles;
 import com.wpa.model.CodeNamePair;
 import com.wpa.model.category.Category;
 import com.wpa.page.BusinessPage;
-import com.wpa.page.Page;
 import com.wpa.page.PageLoader;
 import com.wpa.util.Resources;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -23,7 +21,6 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material2.Material2MZ;
 import org.kordamp.ikonli.material2.Material2OutlinedAL;
 
-import java.net.URI;
 import java.util.List;
 
 import static atlantafx.base.theme.Styles.*;
@@ -47,28 +44,7 @@ public class Sidebar extends VBox {
     private void createView() {
         var header = new Header();
 
-        TreeItem rootItem = new TreeItem("Tutorials");
-
-        TreeItem webItem = new TreeItem("Web Tutorials");
-        webItem.getChildren().add(new TreeItem("HTML  Tutorial"));
-        webItem.getChildren().add(new TreeItem("HTML5 Tutorial"));
-        webItem.getChildren().add(new TreeItem("CSS Tutorial"));
-        webItem.getChildren().add(new TreeItem("SVG Tutorial"));
-        rootItem.getChildren().add(webItem);
-
-        TreeItem javaItem = new TreeItem("Java Tutorials");
-        javaItem.getChildren().add(new TreeItem("Java Language"));
-        javaItem.getChildren().add(new TreeItem("Java Collections"));
-        javaItem.getChildren().add(new TreeItem("Java Concurrency"));
-        rootItem.getChildren().add(javaItem);
-
         TreeView navTree = createNavTree();
-//        navTree.setRoot(rootItem);
-
-//        navTree.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newItem) -> {
-//            loader.loadPage(BusinessPage.class,newItem.g);
-//        });
-
         VBox.setVgrow(navTree, Priority.ALWAYS);
 
         setId("sidebar");
@@ -80,7 +56,6 @@ public class Sidebar extends VBox {
         TreeView<CodeNamePair> categoryTree = new TreeView<>();
 
         TreeItem<CodeNamePair> rootItem = new TreeItem(new CodeNamePair("wph", "工作知识库"));
-
 
         for (Category category : categories) {
             TreeItem categoryItem = new TreeItem(category.getParent().copy());
@@ -110,7 +85,6 @@ public class Sidebar extends VBox {
         });
 
         categoryTree.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newItem) -> {
-            //updateTab(newItem.getValue());
             loader.loadPage(BusinessPage.class,newItem.getValue().getCode());
         });
         return categoryTree;
@@ -118,30 +92,14 @@ public class Sidebar extends VBox {
 
 
     private HBox createFooter() {
-//        var versionLbl = new Label("v" + System.getProperty("app.version"));
-//        versionLbl.getStyleClass().addAll(
-//                "version", TEXT_SMALL, TEXT_BOLD, TEXT_SUBTLE
-//        );
-//        versionLbl.setCursor(Cursor.HAND);
-//        versionLbl.setOnMouseClicked(e -> {
-//            var homepage = System.getProperty("app.homepage");
-//            if (homepage != null) {
-//                DefaultEventBus.getInstance().publish(new BrowseEvent(URI.create(homepage)));
-//            }
-//        });
-//        versionLbl.setTooltip(new Tooltip("Visit homepage"));
-
         var footer = new HBox(new Label("version"));
         footer.getStyleClass().add("footer");
-
         return footer;
     }
 
     private class Header extends VBox {
-
         public Header() {
             super();
-
             getStyleClass().add("header");
             getChildren().setAll(createSearchButton()
             );

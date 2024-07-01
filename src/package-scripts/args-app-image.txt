@@ -1,0 +1,5 @@
+--type app-image
+--main-jar wpa-1.0-SNAPSHOT.jar --main-class ${app.launcher} --input ${build.dependenciesDir}
+--module-path "${build.dependenciesDir}"
+--runtime-image "${build.package.runtimeImageDir}"
+--dest "${build.package.appImageDir}"

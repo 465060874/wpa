@@ -62,7 +62,8 @@ public class Category {
         br.setParent(new CodeNamePair("BR", "Booking Request"));
         br.getChildren().add(new CodeNamePair("br_business","BR Business Knowledge"));
         br.getChildren().add(new CodeNamePair("br_message","BR Message Samples"));
-        br.getChildren().add(new CodeNamePair("br_integration","BR Integration Flow"));
+        br.getChildren().add(new CodeNamePair("br_sql","BR Common SQL"));
+        br.getChildren().add(new CodeNamePair("br_cases","BR Support Cases"));
         categories.add(br);
 
         Category si = new Category();

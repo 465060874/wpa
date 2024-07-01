@@ -3,15 +3,18 @@ package com.wpa;
 import atlantafx.base.theme.PrimerDark;
 import atlantafx.base.theme.PrimerLight;
 import com.wpa.config.AppConfig;
+import com.wpa.database.DatabaseInitializer;
 import com.wpa.layout.ApplicationWindow;
 import com.wpa.mvvm.MvvmfxSpringApplication;
 import com.wpa.theme.ThemeManager;
+import com.wpa.util.Resources;
 import javafx.application.Application;
 import javafx.application.ConditionalFeature;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.SceneAntialiasing;
 import javafx.stage.Stage;
+import org.kordamp.bootstrapfx.BootstrapFX;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -22,6 +25,7 @@ public class NewLauncher extends Application {
     @Override
     public void init() {
         springContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        DatabaseInitializer.initDatabase();
     }
 
     @Override
@@ -55,7 +59,7 @@ public class NewLauncher extends Application {
         var scene = new Scene(root, ApplicationWindow.MIN_WIDTH + 80, 768, false, antialiasing);
 
 //        Application.setUserAgentStylesheet("themes/primer-light.css");
-        Application.setUserAgentStylesheet(new PrimerLight().getUserAgentStylesheet());
+//        Application.setUserAgentStylesheet(new PrimerLight().getUserAgentStylesheet());
 //        scene.getStylesheets().addAll(Resources.resolve("assets/styles/index.css"));
 
 //        var tm = ThemeManager.getInstance();
@@ -66,6 +70,7 @@ public class NewLauncher extends Application {
 //        stage.setTitle(System.getProperty("app.name"));
         stage.setResizable(true);
         stage.setOnCloseRequest(t -> Platform.exit());
+        scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
 
         // register event listeners
 
@@ -82,7 +87,7 @@ public class NewLauncher extends Application {
 
 //    @Override
     public void startMvvmfx(Stage stage) throws Exception {
-        //        Thread.currentThread().setUncaughtExceptionHandler(new DefaultExceptionHandler(stage));
+                Thread.currentThread().setUncaughtExceptionHandler(new DefaultExceptionHandler(stage));
         Application.setUserAgentStylesheet(new PrimerLight().getUserAgentStylesheet());
 //        Application.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
 //        loadApplicationProperties();

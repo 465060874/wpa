@@ -1,0 +1,4 @@
+--name "wpa"
+--app-version "1.0.0"
+--temp "${build.package.tempDir}"
+--verbose
