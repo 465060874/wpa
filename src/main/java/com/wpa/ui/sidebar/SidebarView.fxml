@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Label?>
+<VBox fx:id="sidebar" maxWidth="250.0" minWidth="250.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wpa.ui.sidebar.SidebarView">
+   <children>
+      <TreeView fx:id="treeView" VBox.vgrow="ALWAYS" >
+
+      </TreeView>
+      <Label fx:id="label" />
+   </children>
+</VBox>
